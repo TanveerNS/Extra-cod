@@ -1,0 +1,50 @@
+import java.awt.*;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelListener;
+
+import javax.swing.*;
+
+public class MouseInput extends Core implements KeyListener,MouseMotionListener,MouseListener,MouseWheelListener {
+	
+	public static void main(String[] args){
+		new MouseInput().run();
+	}
+	
+	private String mess = "";
+	
+	// init calls super init
+	public void init(){
+		super.init();
+		Window w = s.getFullScreenWindow();
+		w.addMouseListener(this);
+		w.addMouseMotionListener(this);
+		w.addMouseWheelListener(this);
+		w.addKeyListener(this);
+		
+	}
+	
+	//draw
+	public synchronized void draw(Graphics g){
+		Window w = s.getFullScreenWindow();
+		g.setColor(w.getBackground());
+		g.fillRect(0, 0, s.getWidth(), s.getHeight());
+		g.setColor(w.getForeground());
+		g.drawString(mess, 40, 50);
+	}
+	
+	//Mouse listener interface
+	public void mousePressed(MouseEvent e){
+		mess = "you Pressed down the osye";
+	}
+	public void mouseReleased(MouseEvent e){
+		mess = "YOU released the mouse";
+	}
+	public void mouseClicked(MouseEvent e){}
+	public void mouseEntered(MouseEvent e){}
+	public void mouseExited(MouseEvent e){}
+	
+	
+}

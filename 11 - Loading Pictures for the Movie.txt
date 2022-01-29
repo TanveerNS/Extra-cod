@@ -1,0 +1,41 @@
+import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+public class Tanveer {
+	public static void main(String args[]) {
+		DisplayMode displayMode = new DisplayMode(800,600,16,DisplayMode)
+		Tanveer t = new Tanveer();
+		t.run(displayMode);
+		
+	}
+	
+	private Screen screen;
+	private Image bg;
+	private Animation a;
+	
+	
+	//loads pictures from computer to java and adds scene
+	public void loadPics(){
+		bg = new ImageIcon("C:\\test\\back.jpg").getImage();
+		Image face1 = new ImageIcon("C:\\test\\red.jpg").getImage();
+		Image face2 = new ImageIcon("C:\\test\\green.jpg").getImage();
+		a = new Animation();
+		a.addScene(face1, 250);
+		a.addScene(face2, 250);
+		
+	}
+	
+	//main engine to run 
+	public void run(DisplayMode dm){
+		screen = new Screen();
+		try{
+			screen.setFullScreen(dm, new JFrame());
+			loadPics();
+			movieLoop();
+		}finally{
+			screen.restoreScreen();
+		}
+	}
+	
+}

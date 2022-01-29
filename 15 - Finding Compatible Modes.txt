@@ -1,0 +1,18 @@
+
+	 //Compares DM passed in to vc DM and see if they match
+	 public DisplayMode findFirstCompatibleMode(DisplayMode modes[]){
+		 DisplayMode goodModes[] = vc.getDisplayModes();
+		 for(int x=0; x<modes.length; x++){
+			 for (int y=0;y<goodModes.length; y++){
+				 if(displayModesMatch(modes[x],goodModes[y])){
+					 return modes[x];
+				 }
+			 }
+		 }
+	 }
+	 
+	 // get Current DM
+	 public DisplayMode getCurrentDisplayMode(){
+		 return vc.getDisplayMode();
+	 }
+	 

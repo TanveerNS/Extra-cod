@@ -1,0 +1,11 @@
+
+	 //create image compatible with monitor
+	 public BufferedImage createcompatibleImage(int w,int h,int t){
+		 Window win = vc.getFullScreenWindow();
+		 if(win != null){
+			 GraphicsConfiguration gc = win.getGraphicsConfiguration();
+			 return gc.createCompatibleImage(w, h, t);
+		 }
+		 return null;
+	 }
+	 

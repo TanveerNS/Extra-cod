@@ -1,0 +1,31 @@
+
+//mouse motion interface
+	public void mouseDragged(MouseEvent e){
+		mess = "YOu are dragging the mouse";
+	}
+	public void mouseMoved(MouseEvent e){
+		mess = "You are moving the mouse";
+	}
+
+	//wheel Interface
+	public void mouseWheelMoved(MouseWheelEvent e){
+		mess = "moving mouse wheel";
+	}
+	
+	//KeyPressed
+	public void keyPressed(KeyEvent e){
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_ESCAPE){
+			stop();
+		}else{
+			mess = "Pressed :"+KeyEvent.getKeyText(keyCode);
+			e.consume();
+		}
+		//last method from interface
+		public void keyTyped(KeyEvent e){
+			e.consume();
+		}
+	}
+	
+	
+}

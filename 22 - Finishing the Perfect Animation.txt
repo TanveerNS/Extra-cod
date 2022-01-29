@@ -1,0 +1,5 @@
+//draws Graphics
+	public void draw (Graphics g){
+		g.drawImage(bg, 0, 0, null);
+		g.drawImage(a.getImage(), 0, 0, null);
+	}

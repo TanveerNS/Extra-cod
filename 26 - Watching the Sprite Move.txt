@@ -1,0 +1,18 @@
+	// update sprite
+	public void update (long timePassed){
+		if(sprite.getX() < 0){
+			sprite.setVelocityX(Math.abs(sprite.getVelocityX()));
+			
+		}else if(sprite.getX() + sprite.getWidth() > s.getWidth()){
+			sprite.setVelocityX(-Math.abs(sprite.getVelocityX()));
+		}
+		
+		if(sprite.getY() < 0){
+			sprite.setVelocityY(Math.abs(sprite.getVelocityY()));
+			
+		}else if(sprite.getY() + sprite.getHeight() > s.getHeight()){
+			sprite.setVelocityY(-Math.abs(sprite.getVelocityY()));
+		}
+		
+		sprite.update(timePassed);
+	}

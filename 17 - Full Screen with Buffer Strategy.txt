@@ -1,0 +1,28 @@
+	 
+	 public void setFullScreen(DisplayMode dm){
+		 JFrame f = new JFrame();
+		 f.setUndecorated(true);
+		 f.setIgnoreRepaint(true);
+		 f.setResizable(false);
+		 vc.setFullScreenWindow(f);
+		 
+		 if(dm != null && vc.isDisplayChangeSupported()){
+			 try{
+				 vc.setDisplayMode(dm);
+			 }catch(Exception ex){} 
+		 }
+		 f.createBufferStrategy(2);
+	 }
+	 
+	 //we will set Graphics object = to this
+	 public Graphics2D getGraphics(){
+		 Window w = vc.getFullScreenWindow();
+		 if(w != null){
+			 BufferStrategy s = w.getBufferStrategy();
+			 return (Graphics2D)s.getDrawGraphics();
+		 }else{
+			 return null;
+		 }
+	 }
+	 
+}

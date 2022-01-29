@@ -1,0 +1,34 @@
+	//main method called from main
+	public void run(){
+		s = new ScreenManager();
+		try{
+			DisplayMode dm = s.findFirstCompatibleMode(modes1);
+			s.setFullScreen(dm);
+			loadImages();
+			movieLoop();
+		}finally{
+			s.restoreScreen();
+		}
+	}
+	
+	// public movie
+	public void movieLoop(){
+		long startingTime = System.currentTimeMillis();
+		long cumTime = startingTime;
+		while(cumTime - startingTime < 6000){
+			long timePassed = System.currentTimeMillis() - cumTime;
+			cumTime += timePassed;
+			a.update(timePassed);
+			
+			//draw and update screen
+			Graphics2D g = s.getGraphics();
+			draw(g);
+			g.dispose();
+			s.update();
+			
+			try{
+				Thread.sleep(20);
+			}catch(Exception ex){}
+		}
+	}
+}

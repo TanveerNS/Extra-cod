@@ -1,0 +1,99 @@
+import java.awt.*;
+
+import javax.swing.*;
+
+public class Tanveer2 {
+	public static void main(String args[]) {
+		//DisplayMode displayMode = new DisplayMode(800,600,16,DisplayMode.REFRESH_RATE_UNKNOWN);
+		Tanveer2 t = new Tanveer2();
+		t.run();
+		
+	}
+	
+	private Sprite sprite;
+	private Image bg;
+	private Animation a;
+	private ScreenManager s;
+	
+	private static final DisplayMode modes1[] = {
+		new DisplayMode(800,600,32,0),
+		new DisplayMode(800,600,24,0),
+		new DisplayMode(800,600,16,0),
+		new DisplayMode(800,600,32,0),
+		new DisplayMode(800,600,24,0),
+		new DisplayMode(800,600,16,0),
+	};
+	
+	// load images and add scenes
+	public void loadImages(){
+	bg = new ImageIcon("C:\\test\\back.jpg").getImage();
+	Image face1 = new ImageIcon("C:\\test\\red.jpg").getImage();
+	Image face2 = new ImageIcon("C:\\test\\green.jpg").getImage();
+	
+	a = new Animation();
+	a.addScene(face1,250);
+	a.addScene(face2,250);
+
+	sprite = new Sprite(a);
+	sprite.setVelocityX(0.3f);
+	sprite.setVelocityY(0.3f);
+	}
+	
+	//main method called from main
+	public void run(){
+		s = new ScreenManager();
+		try{
+			DisplayMode dm = s.findFirstCompatibleMode(modes1);
+			s.setFullScreen(dm);
+			loadImages();
+			movieLoop();
+		}finally{
+			s.restoreScreen();
+		}
+	}
+	
+	// play movie
+	public void movieLoop(){
+		long startingTime = System.currentTimeMillis();
+		long cumTime = startingTime;
+		while(cumTime - startingTime < 6000){
+			long timePassed = System.currentTimeMillis() - cumTime;
+			cumTime += timePassed;
+			update(timePassed);
+			
+			//draw and update screen
+			Graphics2D g = s.getGraphics();
+			draw(g);
+			g.dispose();
+			s.update();
+			
+			try{
+				Thread.sleep(20);
+			}catch(Exception ex){}
+		}
+	}
+	//draws Graphics
+	public void draw (Graphics g){
+		g.drawImage(bg, 0, 0, null);
+		g.drawImage(sprite.getImage(), Math.round(sprite.getX()), Math.round(sprite.getY()), null);
+	}
+	// update sprite
+	public void update (long timePassed){
+		if(sprite.getX() < 0){
+			sprite.setVelocityX(Math.abs(sprite.getVelocityX()));
+			
+		}else if(sprite.getX() + sprite.getWidth() > s.getWidth()){
+			sprite.setVelocityX(-Math.abs(sprite.getVelocityX()));
+		}
+		
+		if(sprite.getY() < 0){
+			sprite.setVelocityY(Math.abs(sprite.getVelocityY()));
+			
+		}else if(sprite.getY() + sprite.getHeight() > s.getHeight()){
+			sprite.setVelocityY(-Math.abs(sprite.getVelocityY()));
+		}
+		
+		sprite.update(timePassed);
+	}
+	
+}

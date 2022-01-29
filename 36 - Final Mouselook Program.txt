@@ -1,0 +1,11 @@
+// keylistener interface
+	public void keyPressed(KeyEvent e){
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
+			stop();
+		}
+	}
+	public void keyReleased(KeyEvent e){}
+	public void keyTyped(KeyEvent e){}
+	
+	
+}

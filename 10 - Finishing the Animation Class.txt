@@ -1,0 +1,27 @@
+	//get animations current scene (aka image)
+	public synchronized Image getImage(){
+		if(scenes.size()==0){
+			return null;
+		}else{
+			return getScene(sceneIndex).pic;
+		}
+	}
+	
+	//get scene
+	private OneScene getScene(int x){
+		return (OneScene)scenes.get(x);
+		
+	}
+	
+/////////// Private Inner Class /////////
+	private class OneScene{
+		Image pic;
+		long endTime;
+		
+		public OneScene(Image pic,long endTime){
+			this.pic = pic;
+			this.endTime = endTime;
+		}
+	}
+	
+}

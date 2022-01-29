@@ -1,0 +1,10 @@
+//Keypressed
+	public void keyPressed(KeyEvent e){
+		int keyCode = e.getKeyCode();
+		if(keyCode == KeyEvent.VK_ESCAPE){
+			stop();
+	}else{
+		mess = "Pressed :"+KeyEvent.getKeyText(keyCode);
+		e.consume();
+	}
+	}

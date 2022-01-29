@@ -1,0 +1,32 @@
+	// recenter the mouse using robot
+	private synchronized void recenterMouse(){
+		Window w = s.getFullScreenWindow();
+		if(robot != null && w.isShowing()){
+			center.x = w.getWidth() / 2;
+			center.y = w.getHeight() /2;
+			SwingUtilities.convertPointToScreen(center, w);
+			centering = true;
+			robot.mouseMove(center.x, center.y);
+		}
+	}
+	
+	//mousemotion listenere method
+	public void mouseDragged(MouseEvent e){
+		mouseMoved(e);
+	}
+	public synchronized void mouseMoved(MouseEvent e){
+		if(centering && center.x == e.getX() && center.y == e.getY()){
+			centering = false;
+		}else{
+			int dx = e.getX() - mouse.x;
+			int dy = e.getY() - mouse.y;
+			image.x += dx;
+			image.y += dy;
+			recenterMouse();
+		}
+		
+		mouse.x = e.getX();
+		mouse.y = e.getY();
+	}
+	
+}

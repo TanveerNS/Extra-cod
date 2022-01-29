@@ -1,0 +1,47 @@
+	 //updates display 
+	 public void update(){
+		 Window w = vc.getFullScreenWindow();
+		 if(w != null){
+			 BufferStrategy s = w.getBufferStrategy();
+			 if(!s.contentsLost()){
+				 s.show();
+			 }
+		 }
+	 }
+	 
+	 //returns full screen window
+	 public Window getFullScreenWindow(){
+		 return vc.getFullScreenWindow();
+	 }
+	 
+	 //get width of Window
+	 public int getWidth(){
+		 Window w = vc.getFullScreenWindow();
+		 if(w != null){
+			 return w.getWidth();
+		 }else{
+			 return 0;
+		 }
+	 }
+
+	 //get height of Window
+	 public int getHeight(){
+		 Window w = vc.getFullScreenWindow();
+		 if(w != null){
+			 return w.getHeight();
+		 }else{
+			 return 0;
+		 }
+	 }
+	 
+	 //get out of fullScreen 
+	 public void restoreScreen(){
+		 Window w = vc.getFullScreenWindow();
+		 if(w != null){
+			 w.dispose();
+		 }
+		 vc.setFullScreenWindow(null);
+		 
+	 }
+
+	 

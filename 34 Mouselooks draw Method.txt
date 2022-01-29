@@ -1,0 +1,22 @@
+	//draw 
+	public synchronized void draw (Graphics2D g){
+		int w = s.getWidth();
+		int h = s.getHeight();
+		
+		image.x %= w;
+		image.y %= h;
+		if(image.x < 0){
+			image.x +=w;
+		}
+		if(image.y < 0){
+			image.y += h;
+		}
+		
+		int x = image.x;
+		int y = image.y;
+		g.drawImage(bg, x, y, null);
+		g.drawImage(bg, x-w, y, null);
+		g.drawImage(bg, x, y-h, null);
+		g.drawImage(bg, x-w, y-h, null);
+		
+	}

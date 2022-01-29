@@ -1,0 +1,76 @@
+import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+public class Tanveer {
+	public static void main(String args[]) {
+		//DisplayMode displayMode = new DisplayMode(800,600,16,DisplayMode.REFRESH_RATE_UNKNOWN);
+		Tanveer t = new Tanveer();
+		t.run();
+		
+	}
+	
+	private Image bg;
+	private Animation a;
+	private ScreenManager s;
+	
+	private static final DisplayMode modes1[] = {
+		new DisplayMode(800,600,32,0),
+		new DisplayMode(800,600,24,0),
+		new DisplayMode(800,600,16,0),
+		new DisplayMode(800,600,32,0),
+		new DisplayMode(800,600,24,0),
+		new DisplayMode(800,600,16,0),
+	};
+	
+	// load images and add scenes
+	public void loadImages(){
+	bg = new ImageIcon("C:\\test\\back.jpg").getImage();
+	Image face1 = new ImageIcon("C:\\test\\red.jpg").getImage();
+	Image face2 = new ImageIcon("C:\\test\\green.jpg").getImage();
+	
+	a = new Animation();
+	a.addScene(face1,250);
+	a.addScene(face2,250);
+
+	}
+	
+	//main method called from main
+	public void run(){
+		s = new ScreenManager();
+		try{
+			DisplayMode dm = s.findFirstCompatibleMode(modes1);
+			s.setFullScreen(dm);
+			loadImages();
+			movieLoop();
+		}finally{
+			s.restoreScreen();
+		}
+	}
+	
+	// public movie
+	public void movieLoop(){
+		long startingTime = System.currentTimeMillis();
+		long cumTime = startingTime;
+		while(cumTime - startingTime < 6000){
+			long timePassed = System.currentTimeMillis() - cumTime;
+			cumTime += timePassed;
+			a.update(timePassed);
+			
+			//draw and update screen
+			Graphics2D g = s.getGraphics();
+			draw(g);
+			g.dispose();
+			s.update();
+			
+			try{
+				Thread.sleep(20);
+			}catch(Exception ex){}
+		}
+	}
+	//draws Graphics
+	public void draw (Graphics g){
+		g.drawImage(bg, 0, 0, null);
+		g.drawImage(a.getImage(), 0, 0, null);
+	}
+}

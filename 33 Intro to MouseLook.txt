@@ -1,0 +1,44 @@
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
+
+public class Look extends Core implements KeyListener,MouseMotionListener,MouseListener,MouseWheelListener {
+
+	public static void main(String args[]){
+		new Look().run();
+	}
+	
+	private Image bg;
+	private Robot robot;
+	private Point mouse;
+	private Point center;
+	private Point image;
+	private boolean centering;
+	
+	// init
+	
+	public void init(){
+		super.init();
+		mouse = new Point();
+		center = new Point();
+		image = new Point();
+		centering = false;
+		
+		try{
+			robot = new Robot();
+			recenterMouse();
+			mouse.x = center.x;
+			mouse.y = center.y;
+		}catch(Exception ex){
+			System.out.println("Exception 1");
+		}
+		
+		Window w = s.getFullScreenWindow();
+		w.addMouseMotionListener(this);
+		w.addKeyListener(this);
+		bg = new ImageIcon("C:\\test\\back.jpg").getImage();
+	}
+	
+}
